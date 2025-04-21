@@ -33,7 +33,7 @@ const Signup = () => {
   const [resendSuccess, setResendSuccess] = useState(false);
   const [userEmail, setUserEmail] = useState("");
 
-  const API_URL = import.meta.env.API_URL;
+  const API_URL = import.meta.env.VITE_API_URL;
 
   const {
     register,
@@ -184,7 +184,6 @@ const Signup = () => {
             >
               <option value="student">Student</option>
               <option value="landlord">Landlord</option>
-              <option value="admin">Admin</option>
             </select>
           </div>
           

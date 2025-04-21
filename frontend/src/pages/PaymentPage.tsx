@@ -22,7 +22,7 @@ const PaymentPage = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [isProcessing, setIsProcessing] = useState(false);
 
-  const API_URL = import.meta.env.API_URL;
+  const API_URL = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
   if(!booking || !booking_id || !total_price || !user_id ) {

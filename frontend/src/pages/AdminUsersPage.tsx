@@ -24,7 +24,7 @@ const UsersPage = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [error, setError] = useState("");
 
-  const API_URL = import.meta.env.API_URL;
+  const API_URL = import.meta.env.VITE_API_URL;
 
   // Pagination States
   const [studentPage, setStudentPage] = useState(1);

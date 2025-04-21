@@ -19,7 +19,7 @@ const ContactUs = () => {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submissionError, setSubmissionError] = useState<string | null>(null);
-  const API_URL = import.meta.env.API_URL;
+  const API_URL = import.meta.env.VITE_API_URL;
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;

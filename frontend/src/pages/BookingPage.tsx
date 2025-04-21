@@ -11,7 +11,7 @@ const BookingPage = () => {
   const navigate = useNavigate();
   const { user_id, room_id, room_price, hostel_id } = location.state || {};
 
-  const API_URL = import.meta.env.API_URL;
+  const API_URL = import.meta.env.VITE_API_URL;
 
   const [startDate, setStartDate] = useState<Date | null>(null);
   const [endDate, setEndDate] = useState<Date | null>(null);

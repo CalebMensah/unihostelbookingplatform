@@ -27,7 +27,7 @@ const AllHostelsPage: React.FC = () => {
     limit: 10
   })
 
-  const API_URL = import.meta.env.API_URL;
+  const API_URL = import.meta.env.VITE_API_URL;
 
   // Fetch hostels from the backend
   useEffect(() => {

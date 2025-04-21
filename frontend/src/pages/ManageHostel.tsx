@@ -56,7 +56,7 @@ const ManageHostel = () => {
   const [successMessage, setSuccessMessage] = useState("");
   const navigate = useNavigate();
 
-  const API_URL = import.meta.env.API_URL;
+  const API_URL = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     // Set initial active tab based on URL parameter

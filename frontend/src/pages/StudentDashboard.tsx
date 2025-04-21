@@ -47,7 +47,7 @@ const StudentDashboard = () => {
   const [isEmailVerified, setIsEmailVerified] = useState<boolean>(false);
   const user = localStorage.getItem("userId");
   const navigate = useNavigate();
-  const API_URL = import.meta.env.API_URL;
+  const API_URL = import.meta.env.VITE_API_URL;
 
 
   useEffect(() => {

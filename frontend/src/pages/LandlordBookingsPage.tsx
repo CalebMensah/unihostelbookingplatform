@@ -37,7 +37,7 @@ const LandlordBookingsPage: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [itemsPerPage] = useState<number>(5);
 
-  const API_URL = import.meta.env.API_URL;
+  const API_URL = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     const fetchBookings = async () => {

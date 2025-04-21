@@ -29,7 +29,7 @@ const StudentsPage: React.FC = () => {
         totalStudents: 0,
         pageSize: 10
     });
-    const API_URL = import.meta.env.API_URL;
+    const API_URL = import.meta.env.VITE_API_URL;
 
     const fetchUsers = async (page = 1) => { 
         try { 

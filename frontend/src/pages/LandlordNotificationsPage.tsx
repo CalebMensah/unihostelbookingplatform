@@ -37,7 +37,7 @@ const LandlordNotificationsPage: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<number>(0);
   const itemsPerPage = 10;
 
-  const API_URL = import.meta.env.API_URL;
+  const API_URL = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     fetchNotifications(currentPage * itemsPerPage, itemsPerPage);

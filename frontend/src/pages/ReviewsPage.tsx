@@ -44,7 +44,7 @@ export const ReviewsPage = () => {
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
 
-  const API_URL = import.meta.env.API_URL;
+  const API_URL = import.meta.env.VITE_API_URL;
 
   const userId = localStorage.getItem("userid");
   console.log("reviews userid:", userId)
