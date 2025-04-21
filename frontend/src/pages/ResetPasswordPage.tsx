@@ -30,6 +30,8 @@ const ResetPassword = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [tokenValid, setTokenValid] = useState(true);
 
+  const API_URL = import.meta.env.API_URL;
+
   useEffect(() => {
     // Check if token exists
     if (!token) {
@@ -55,7 +57,7 @@ const ResetPassword = () => {
     setIsLoading(true);
 
     try {
-      await axios.post(`/api/auth/reset-password/${token}`, 
+      await axios.post(`${API_URL}/api/auth/reset-password/${token}`, 
         { newPassword: data.newPassword },
         {
           headers: { "Content-Type": "application/json" },

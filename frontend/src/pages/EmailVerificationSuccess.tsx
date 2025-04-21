@@ -10,6 +10,8 @@ const EmailVerificationSuccess = () => {
   const [verificationStatus, setVerificationStatus] = useState<'verifying' | 'success' | 'error'>('verifying');
   const [errorMessage, setErrorMessage] = useState('');
 
+  const API_URL = import.meta.env.API_URL;
+
   useEffect(() => {
     const verifyEmail = async () => {
       if (token) {
@@ -18,7 +20,7 @@ const EmailVerificationSuccess = () => {
           const cleanToken = token.replace(/^\/+/, '');
           
           // Make the verification request to the backend
-          const response = await axios.get(`/api/verify-email/${cleanToken}`);
+          const response = await axios.get(`${API_URL}/api/verify-email/${cleanToken}`);
           console.log('Verification response:', response.data);
           setVerificationStatus('success');
           
@@ -38,7 +40,7 @@ const EmailVerificationSuccess = () => {
     };
 
     verifyEmail();
-  }, [token, navigate]);
+  }, [token, navigate, API_URL]);
 
   if (verificationStatus === 'verifying') {
     return (

@@ -36,10 +36,12 @@ const LandlordProfilePage: React.FC = () => {
   const [expandedPropertyId, setExpandedPropertyId] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
 
+  const API_URL = import.meta.env.API_URL;
+
   useEffect(() => {
     const fetchProfileDetails = async () => {
       try {
-        const response = await axios.get('/api/auth/landlord', {
+        const response = await axios.get(`${API_URL}/api/auth/landlord`, {
           headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
         });
         setProfile(response.data);
@@ -51,7 +53,7 @@ const LandlordProfilePage: React.FC = () => {
       }
     };
     fetchProfileDetails();
-  }, []);
+  }, [API_URL]);
 
   const handleEditToggle = () => {
     if (!isEditing && profile) {
@@ -81,7 +83,7 @@ const LandlordProfilePage: React.FC = () => {
     if (!validateForm()) return;
 
     try {
-      await axios.put('/api/auth/landlord', editedProfile, {
+      await axios.put(`${API_URL}/api/auth/landlord`, editedProfile, {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
       });
 

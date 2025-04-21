@@ -11,6 +11,8 @@ const BookingPage = () => {
   const navigate = useNavigate();
   const { user_id, room_id, room_price, hostel_id } = location.state || {};
 
+  const API_URL = import.meta.env.API_URL;
+
   const [startDate, setStartDate] = useState<Date | null>(null);
   const [endDate, setEndDate] = useState<Date | null>(null);
 
@@ -48,7 +50,7 @@ const BookingPage = () => {
 
       console.log("Submitting booking data:", bookingData);
 
-      const response = await axios.post("/api/bookings", bookingData, {
+      const response = await axios.post(`${API_URL}/api/bookings`, bookingData, {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       });
 

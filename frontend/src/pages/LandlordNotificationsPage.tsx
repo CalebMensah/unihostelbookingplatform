@@ -37,13 +37,16 @@ const LandlordNotificationsPage: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<number>(0);
   const itemsPerPage = 10;
 
+  const API_URL = import.meta.env.API_URL;
+
   useEffect(() => {
     fetchNotifications(currentPage * itemsPerPage, itemsPerPage);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPage]);
 
   const fetchNotifications = async (offset: number, limit: number) => {
     try {
-      const response = await axios.get(`/api/notifications?limit=${limit}&offset=${offset}`, {
+      const response = await axios.get(`${API_URL}/api/notifications?limit=${limit}&offset=${offset}`, {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
       });
       setNotifications(response.data.notifications);
@@ -61,7 +64,7 @@ const LandlordNotificationsPage: React.FC = () => {
 
   const markAsRead = async (id: number) => {
     try {
-      await axios.put(`/api/notifications/${id}/read`, {}, {
+      await axios.put(`${API_URL}/api/notifications/${id}/read`, {}, {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
       });
       setNotifications((prev) =>
@@ -77,7 +80,7 @@ const LandlordNotificationsPage: React.FC = () => {
 
   const deleteNotification = async (id: number) => {
     try {
-      await axios.delete(`/api/notifications/${id}`, {
+      await axios.delete(`${API_URL}/api/notifications/${id}`, {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
       });
       setNotifications((prev) => prev.filter((notification) => notification.notificationid !== id));

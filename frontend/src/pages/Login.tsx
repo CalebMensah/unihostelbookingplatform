@@ -17,6 +17,8 @@ const Login = () => {
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
+  const API_URL = import.meta.env.API_URL;
+
   const {
     register,
     handleSubmit,
@@ -28,7 +30,7 @@ const Login = () => {
     setIsLoading(true);
     
     try {
-      const response = await axios.post("/api/auth/login", data, {
+      const response = await axios.post(`${API_URL}/api/auth/login`, data, {
         headers: { "Content-Type": "application/json" },
       });
       

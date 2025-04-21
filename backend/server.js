@@ -21,6 +21,10 @@ app.use(cors())
 app.use(helmet())
 app.use(express.json())
 
+app.use(cors({
+    origin: 'https://unihostelbookingplatform.vercel.app/'
+}))
+
 //Routes
 app.use("/api/auth", authRoutes)
 app.use("/api/", emailRoutes)
@@ -32,5 +36,5 @@ app.use("/api/payments", paymentRoutes)
 app.use("/api/admin", adminRoutes)
 app.use("/api/notifications", notificationRoutes)
 
-const PORT = process.env.PORT
+const PORT = 8080
 app.listen(PORT, ()=> console.log(`Server running on port ${PORT}`))

@@ -56,6 +56,8 @@ const ManageHostel = () => {
   const [successMessage, setSuccessMessage] = useState("");
   const navigate = useNavigate();
 
+  const API_URL = import.meta.env.API_URL;
+
   useEffect(() => {
     // Set initial active tab based on URL parameter
     if (tabParam === 'rooms') {
@@ -67,14 +69,14 @@ const ManageHostel = () => {
     const fetchData = async () => {
       try {
         const [verificationResponse, hostelResponse] = await Promise.all([
-          axios.get('/api/verification-status', {
+          axios.get(`${API_URL}/api/verification-status`, {
             headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
           }),
           hostelId 
-            ? axios.get(`/api/hostels/${hostelId}`, {
+            ? axios.get(`${API_URL}/api/hostels/${hostelId}`, {
                 headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
               })
-            : axios.get('/api/hostels/manager', {
+            : axios.get(`${API_URL}/api/hostels/manager`, {
                 headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
               })
         ]);
@@ -112,11 +114,11 @@ const ManageHostel = () => {
     };
 
     fetchData();
-  }, [navigate, hostelId]);
+  }, [navigate, hostelId, API_URL]);
 
   const sendVerificationEmail = async () => {
     try {
-      await axios.post('/api/request-verification-email', {}, {
+      await axios.post(`${API_URL}/api/request-verification-email`, {}, {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       });
       toast.success("Verification email sent! Please check your inbox.");
@@ -151,7 +153,7 @@ const ManageHostel = () => {
     }
 
     try {
-        const response = await axios.post('/api/hostels', formData, {
+        const response = await axios.post(`${API_URL}/api/hostels`, formData, {
             headers: { 
                 Authorization: `Bearer ${localStorage.getItem('token')}`,
                 'Content-Type': 'multipart/form-data'
@@ -189,7 +191,7 @@ const ManageHostel = () => {
     }
 
     try {
-      await axios.put(`/api/hostels/${hostel.id}`, formData, {
+      await axios.put(`${API_URL}/api/hostels/${hostel.id}`, formData, {
         headers: { 
           Authorization: `Bearer ${localStorage.getItem('token')}`,
           'Content-Type': 'multipart/form-data'
@@ -220,7 +222,7 @@ const ManageHostel = () => {
     }
 
     try {
-      await axios.post('/api/rooms', formData, {
+      await axios.post(`${API_URL}/api/rooms`, formData, {
         headers: { 
           Authorization: `Bearer ${localStorage.getItem('token')}`,
           'Content-Type': 'multipart/form-data'
@@ -239,7 +241,7 @@ const ManageHostel = () => {
     if (!confirm("Are you sure you want to delete this room?")) return;
     
     try {
-      await axios.delete(`/api/rooms/${roomId}`, {
+      await axios.delete(`${API_URL}/api/rooms/${roomId}`, {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
       });
       setSuccessMessage('Room deleted successfully!');

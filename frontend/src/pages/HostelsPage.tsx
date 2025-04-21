@@ -31,6 +31,8 @@ const HostelsPage = () => {
     amenities: []
   });
 
+  const API_URL = import.meta.env.API_URL;
+
   useEffect(() => {
     const fetchHostels = async () => {
       try {
@@ -41,7 +43,7 @@ const HostelsPage = () => {
         if (filters.maxPrice) params.append('maxPrice', filters.maxPrice.toString());
         if (filters.amenities.length > 0) params.append('amenities', filters.amenities.join(','));
 
-        const res = await axios.get(`/api/hostels?${params.toString()}`);
+        const res = await axios.get(`${API_URL}/api/hostels?${params.toString()}`);
         setHostels(res.data);
         setLoading(false);
       } catch (error: any) {
@@ -52,7 +54,7 @@ const HostelsPage = () => {
     };
 
     fetchHostels();
-  }, [searchQuery, filters]);
+  }, [searchQuery, filters, API_URL]);
 
   const handleAmenitiesChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const amenitiesArray = e.target.value ? e.target.value.split(',').map(item => item.trim()) : [];

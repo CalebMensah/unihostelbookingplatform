@@ -24,6 +24,8 @@ const UsersPage = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [error, setError] = useState("");
 
+  const API_URL = import.meta.env.API_URL;
+
   // Pagination States
   const [studentPage, setStudentPage] = useState(1);
   const [landlordPage, setLandlordPage] = useState(1);
@@ -59,7 +61,7 @@ const UsersPage = () => {
       setError("");
       try {
         const fetchUsers = async (type: "students" | "landlords") => {
-          const response = await axios.get("/api/admin/users", {
+          const response = await axios.get(`${API_URL}/api/admin/users`, {
             params: {
               type,
               page: type === "students" ? studentPage : landlordPage,
@@ -100,7 +102,7 @@ const UsersPage = () => {
     };
 
     fetchData();
-  }, [studentPage, landlordPage, searchTerm]);
+  }, [studentPage, landlordPage, searchTerm, API_URL]);
 
   // Render Pagination
   const renderPagination = (

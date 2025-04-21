@@ -27,11 +27,13 @@ const AllHostelsPage: React.FC = () => {
     limit: 10
   })
 
+  const API_URL = import.meta.env.API_URL;
+
   // Fetch hostels from the backend
   useEffect(() => {
     const fetchHostels = async () => {
       try {
-        const response = await fetch(`/api/admin/hostels?page=${pagination.currentPage}&limit=${pagination.limit}`); // Replace with your backend API endpoint
+        const response = await fetch(`${API_URL}/api/admin/hostels?page=${pagination.currentPage}&limit=${pagination.limit}`); // Replace with your backend API endpoint
         if (!response.ok) {
           throw new Error('Failed to fetch hostels');
         }
@@ -51,7 +53,7 @@ const AllHostelsPage: React.FC = () => {
     };
 
     fetchHostels();
-  }, [pagination.currentPage, pagination.limit]);
+  }, [API_URL, pagination.currentPage, pagination.limit]);
 
   const handlePaginationChange =(newPage: number) => {
     if(newPage >= 1 && newPage <= pagination.totalHostels) {

@@ -22,6 +22,8 @@ const PaymentPage = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [isProcessing, setIsProcessing] = useState(false);
 
+  const API_URL = import.meta.env.API_URL;
+
   useEffect(() => {
   if(!booking || !booking_id || !total_price || !user_id ) {
   console.error("Invalid or missing booking data");
@@ -39,7 +41,7 @@ const PaymentPage = () => {
 
     try {
       setIsProcessing(true);
-      const response = await axios.post("/api/payments/initialize", {
+      const response = await axios.post(`${API_URL}/api/payments/initialize`, {
         booking_id,
         user_id,
         amount: total_price,

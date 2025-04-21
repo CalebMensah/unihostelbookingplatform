@@ -23,6 +23,8 @@ const LandlordUploadForm: React.FC = () => {
     });
     const navigate = useNavigate()
 
+    const API_URL = import.meta.env.API_URL;
+
     // Handle changes in text inputs and select dropdowns
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
@@ -52,7 +54,7 @@ const LandlordUploadForm: React.FC = () => {
 
         try {
             // Send POST request to the backend
-            const response = await axios.post("/api/hostels/upload-documents", formDataToSend, {
+            const response = await axios.post(`${API_URL}/api/hostels/upload-documents`, formDataToSend, {
                 headers: { 
                     Authorization: `Bearer ${localStorage.getItem("token")}`,
                     "Content-Type": "multipart/form-data" },

@@ -23,10 +23,12 @@ const StudentBookingsPage: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [loading, setLoading] = useState(true);
 
+  const API_URL = import.meta.env.API_URL;
+
   useEffect(() => {
     const fetchBookings = async () => {
       try {
-        const response = await axios.get('/api/bookings/student-booking', {
+        const response = await axios.get(`${API_URL}/api/bookings/student-booking`, {
           headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
         });
         setBookings(response.data);
@@ -37,7 +39,7 @@ const StudentBookingsPage: React.FC = () => {
       }
     };
     fetchBookings();
-  }, []);
+  }, [API_URL]);
 
   const toggleBookingExpand = (bookingId: string) => {
     if (expandedBookingId === bookingId) {

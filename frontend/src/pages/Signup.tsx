@@ -33,6 +33,8 @@ const Signup = () => {
   const [resendSuccess, setResendSuccess] = useState(false);
   const [userEmail, setUserEmail] = useState("");
 
+  const API_URL = import.meta.env.API_URL;
+
   const {
     register,
     handleSubmit,
@@ -46,7 +48,7 @@ const Signup = () => {
     setResendSuccess(false);
 
     try {
-      await axios.post("/api/auth/register", data, {
+      await axios.post(`${API_URL}/api/auth/register`, data, {
         headers: { "Content-Type": "application/json" },
       });
       setUserEmail(data.email);
@@ -69,7 +71,7 @@ const Signup = () => {
     setResendSuccess(false);
     try {
       await axios.post(
-        "/api/auth/request-verification-email",
+        `${API_URL}/api/auth/request-verification-email`,
         { email: userEmail },
         {
           headers: { "Content-Type": "application/json" },

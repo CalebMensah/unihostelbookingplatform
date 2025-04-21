@@ -25,16 +25,18 @@ const AdminDashboard: React.FC = () => {
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
 
+    const API_URL = import.meta.env.API_URL;
+
     useEffect(() => {
       const fetchData = async () => {
         try {
           // First check verification status
-          const verificationResponse = await axios.get('/api/verification-status', {
+          const verificationResponse = await axios.get(`${API_URL}/api/verification-status`, {
             headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
           });
           setIsEmailVerified(verificationResponse.data.isVerified);
           try {
-            const response = await axios.get("/api/admin/documents");
+            const response = await axios.get(`${API_URL}/api/admin/documents`);
             setDocuments(response.data);
         } catch (error) {
             console.error(error);
@@ -73,7 +75,7 @@ const AdminDashboard: React.FC = () => {
     // Handle document verification
     const handleVerification = async (documentId: number, status: string) => {
         try {
-            await axios.post("/api/admin/verify-document", { documentId, status });
+            await axios.post(`${API_URL}/api/admin/verify-document`, { documentId, status });
             setDocuments((prev) =>
                 prev.map((doc) => (doc.id === documentId ? { ...doc, verificationStatus: status } : doc))
             );
@@ -93,7 +95,7 @@ const AdminDashboard: React.FC = () => {
 
       const sendVerificationEmail = async () => {
         try {
-          await axios.post('/api/request-verification-email', {}, {
+          await axios.post(`${API_URL}/api/request-verification-email`, {}, {
             headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
           });
           toast.success("Verification email sent! Please check your inbox.");

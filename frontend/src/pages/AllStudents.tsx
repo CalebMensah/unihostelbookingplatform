@@ -29,11 +29,12 @@ const StudentsPage: React.FC = () => {
         totalStudents: 0,
         pageSize: 10
     });
+    const API_URL = import.meta.env.API_URL;
 
     const fetchUsers = async (page = 1) => { 
         try { 
             setLoading(true);
-            const response = await axios.get("/api/auth/users", {
+            const response = await axios.get(`${API_URL}/api/auth/users`, {
                 params: { page, limit: 10 }
             }); 
             setStudents(response.data.students);
@@ -48,6 +49,7 @@ const StudentsPage: React.FC = () => {
 
     useEffect(() => {
         fetchUsers(); 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []); 
 
     const handlePageChange = (newPage: number) => {

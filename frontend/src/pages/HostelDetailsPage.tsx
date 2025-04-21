@@ -38,13 +38,14 @@ const HostelDetailsPage = () => {
   const [activeRoomImageIndex, setActiveRoomImageIndex] = useState(0);
   const [showRoomImages, setShowRoomImages] = useState(false);
   const navigate = useNavigate();
+  const API_URL = import.meta.env.API_URL;
 
 
   useEffect(() => {
     const fetchHostel = async () => {
       try {
         setLoading(true);
-        const res = await axios.get(`/api/hostels/${id}`);
+        const res = await axios.get(`${API_URL}/api/hostels/${id}`);
         if (!res.data) {
           throw new Error('No hostel data received');
         }
@@ -79,7 +80,7 @@ const HostelDetailsPage = () => {
     if (id) {
     fetchHostel();
     }
-  }, [id]);
+  }, [API_URL, id]);
 
   // Add debug log for rooms data when rendering floors
   const availableFloors = hostel?.rooms ? Array.from(new Set(hostel.rooms.map(room => room.floor))) : [];

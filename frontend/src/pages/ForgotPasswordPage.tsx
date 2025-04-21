@@ -18,6 +18,8 @@ const ForgotPassword = () => {
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
+  const API_URL = import.meta.env.API_URL;
+
   const {
     register,
     handleSubmit,
@@ -32,7 +34,7 @@ const ForgotPassword = () => {
     setIsLoading(true);
 
     try {
-      await axios.post("/api/auth/forgot-password", data, {
+      await axios.post(`${API_URL}/api/auth/forgot-password`, data, {
         headers: { "Content-Type": "application/json" },
       });
       setMessage("A reset link has been sent to your email.");

@@ -31,18 +31,20 @@ const ManagerDashboard = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const navigate = useNavigate();
 
+  const API_URL = import.meta.env.API_URL;
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         // First check verification status
-        const verificationResponse = await axios.get('/api/verification-status', {
+        const verificationResponse = await axios.get(`${API_URL}/api/verification-status`, {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         });
         setIsEmailVerified(verificationResponse.data.isVerified);
 
         // Then fetch hostels and bookings separately to handle errors individually
         try {
-          const hostelResponse = await axios.get('/api/hostels/manager', {
+          const hostelResponse = await axios.get(`${API_URL}/api/hostels/manager`, {
             headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
           });
           setHostels(hostelResponse.data);
@@ -53,7 +55,7 @@ const ManagerDashboard = () => {
         }
 
         try {
-          const bookingResponse = await axios.get('/api/bookings/manager?limit=10', {
+          const bookingResponse = await axios.get(`${API_URL}/api/bookings/manager?limit=10`, {
             headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
           });
           setBookings(bookingResponse.data);
@@ -93,7 +95,7 @@ const ManagerDashboard = () => {
 
   const sendVerificationEmail = async () => {
     try {
-      await axios.post('/api/request-verification-email', {}, {
+      await axios.post(`${API_URL}/api/request-verification-email`, {}, {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       });
       toast.success("Verification email sent! Please check your inbox.");

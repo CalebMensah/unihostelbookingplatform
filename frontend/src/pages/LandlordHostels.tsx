@@ -24,11 +24,13 @@ const LandlordDashboard: React.FC = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const navigate = useNavigate();
 
+  const API_URL = import.meta.env.API_URL;
+
   // Fetch hostel from the backend
   useEffect(() => {
     const fetchHostel = async () => {
       try {
-        const response = await fetch('/api/hostels/landlord/hostel', {
+        const response = await fetch(`${API_URL}/api/hostels/landlord/hostel`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`
           }
@@ -46,7 +48,7 @@ const LandlordDashboard: React.FC = () => {
       }
     };
     fetchHostel();
-  }, []);
+  }, [API_URL]);
 
 
   if (loading) {

@@ -37,10 +37,12 @@ const LandlordBookingsPage: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [itemsPerPage] = useState<number>(5);
 
+  const API_URL = import.meta.env.API_URL;
+
   useEffect(() => {
     const fetchBookings = async () => {
       try {
-        const response = await axios.get('/api/bookings/landlord-bookings', {
+        const response = await axios.get(`${API_URL}/api/bookings/landlord-bookings`, {
           headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
         });
         setBookings(response.data);
@@ -52,7 +54,7 @@ const LandlordBookingsPage: React.FC = () => {
       }
     };
     fetchBookings();
-  }, []);
+  }, [API_URL]);
 
   const filteredBookings = bookings.filter((booking) => {
     const matchesSearch =

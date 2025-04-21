@@ -44,6 +44,8 @@ export const ReviewsPage = () => {
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
 
+  const API_URL = import.meta.env.API_URL;
+
   const userId = localStorage.getItem("userid");
   console.log("reviews userid:", userId)
   const userLoggedIn = !!userId;
@@ -53,12 +55,12 @@ export const ReviewsPage = () => {
       try {
         setLoading(true);
         // Fetch hostel info
-        const hostelRes = await axios.get(`/api/hostels/${id}/info`);
+        const hostelRes = await axios.get(`${API_URL}/api/hostels/${id}/info`);
         setHostelInfo(hostelRes.data);
 
         // Fetch reviews with filtering and sorting
         const reviewsRes = await axios.get(
-          `/api/review/${id}/reviews?filter=${filter}&sort=${sortBy}&page=${page}&limit=10`
+          `${API_URL}/api/review/${id}/reviews?filter=${filter}&sort=${sortBy}&page=${page}&limit=10`
         );
         if (page === 1) {
           setReviews(reviewsRes.data.reviews);
@@ -74,7 +76,7 @@ export const ReviewsPage = () => {
       }
     };
     fetchHostelAndReviews();
-  }, [id, filter, sortBy, page]);
+  }, [id, filter, sortBy, page, API_URL]);
 
   const handleSubmitReview = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -95,7 +97,7 @@ export const ReviewsPage = () => {
 
     try {
       setSubmitting(true);
-      await axios.post(`/api/review/${id}/reviews`, {
+      await axios.post(`${API_URL}/api/review/${id}/reviews`, {
         user_id: userId,
         rating,
         comment,
@@ -113,7 +115,7 @@ export const ReviewsPage = () => {
       setShowReviewForm(false);
       setPage(1); // Refresh reviews with first page
       const reviewsRes = await axios.get(
-        `/api/review/${id}/reviews?filter=${filter}&sort=${sortBy}&page=1&limit=10`
+        `${API_URL}/api/review/${id}/reviews?filter=${filter}&sort=${sortBy}&page=1&limit=10`
       );
       setReviews(reviewsRes.data.reviews);
       setHasMore(reviewsRes.data.has_more);

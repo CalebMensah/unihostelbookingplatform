@@ -7,12 +7,14 @@ const PaymentSuccess = () => {
     const navigate = useNavigate();
     const location = useLocation();
 
+    const API_URL = import.meta.env.API_URL;
+
     useEffect(() => {
         const queryParams = new URLSearchParams(location.search);
         const reference = queryParams.get("reference");
 
         if(reference) {
-            axios.get(`/api/payments/verify?reference=${reference}`)
+            axios.get(`${API_URL}/api/payments/verify?reference=${reference}`)
             .then((response) => {
                 console.log("Payment verified:", response.data)
             })
@@ -24,7 +26,7 @@ const PaymentSuccess = () => {
         setTimeout(() => {
             navigate("/student-dashboard");
         }, 3000)
-    }, [navigate, location])
+    }, [navigate, location, API_URL])
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-50 px-4 py-6">
         <div className="bg-white p-6 rounded-lg shadow-lg text-center">

@@ -47,26 +47,27 @@ const StudentDashboard = () => {
   const [isEmailVerified, setIsEmailVerified] = useState<boolean>(false);
   const user = localStorage.getItem("userId");
   const navigate = useNavigate();
+  const API_URL = import.meta.env.API_URL;
 
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         // Check verification status first
-        const verificationResponse = await axios.get('/api/verification-status', {
+        const verificationResponse = await axios.get(`${API_URL}/api/verification-status`, {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         });
         setIsEmailVerified(verificationResponse.data.isVerified);
         console.log('Email verification status:', verificationResponse.data.isVerified);
 
         // Fetch bookings
-        const response = await axios.get(`/api/bookings/student`, {
+        const response = await axios.get(`${API_URL}/api/bookings/student`, {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         });
         setBookings(response.data);
 
         // fetch payments
-        const res = await axios.get(`/api/payments/user`, {
+        const res = await axios.get(`${API_URL}/api/payments/user`, {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         });
         setPayments(res.data);
@@ -96,7 +97,7 @@ const StudentDashboard = () => {
 
   const sendVerificationEmail = async () => {
     try {
-      await axios.post('/api/request-verification-email', {}, {
+      await axios.post(`${API_URL}/api/request-verification-email`, {}, {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       });
       toast.success("Verification email sent! Please check your inbox.");
@@ -123,7 +124,7 @@ const StudentDashboard = () => {
   
     try {
       console.log("Deleting booking with id:", id);
-      await axios.delete(`/api/bookings/${id}`, {
+      await axios.delete(`${API_URL}/api/bookings/${id}`, {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       });
       toast.success("Booking deleted successfully");
