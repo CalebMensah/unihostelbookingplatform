@@ -25,6 +25,10 @@ app.use(cors({
     origin: 'https://unihostelbookingplatform.vercel.app/'
 }))
 
+app.get('/', (req,res) => {
+    res.send('Hello from hostel booking platform. It shows that the backend is set up correctly and working correctly.')
+})
+
 //Routes
 app.use("/api/auth", authRoutes)
 app.use("/api/", emailRoutes)
