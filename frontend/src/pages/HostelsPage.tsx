@@ -46,6 +46,7 @@ const HostelsPage = () => {
 
         const res = await axios.get(`${API_URL}/api/hostels?${params.toString()}`);
         setHostels(res.data);
+        console.log("hostels from railwway database:", res.data)
         setLoading(false);
       } catch (error: any) {
         setError(error.message);
