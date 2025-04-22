@@ -32,6 +32,7 @@ const HostelsPage = () => {
   });
 
   const API_URL = import.meta.env.VITE_API_URL;
+  console.log("frontend url from vercel:", API_URL)
 
   useEffect(() => {
     const fetchHostels = async () => {
