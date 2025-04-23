@@ -22,7 +22,8 @@ app.use(helmet())
 app.use(express.json())
 
 app.use(cors({
-    origin: 'https://unihostelbookingplatform.vercel.app'
+    origin: 'https://unihostelbookingplatform.vercel.app',
+    credentials: true
 }))
 
 app.get('/', (req,res) => {
