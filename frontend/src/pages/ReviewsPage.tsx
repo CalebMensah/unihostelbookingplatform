@@ -121,7 +121,7 @@ export const ReviewsPage = () => {
       setHasMore(reviewsRes.data.has_more);
 
       // Refresh hostel info to update average rating
-      const hostelRes = await axios.get(`/api/hostels/${id}/info`);
+      const hostelRes = await axios.get(`${API_URL}/api/hostels/${id}/info`);
       setHostelInfo(hostelRes.data);
     } catch (error) {
       console.error("Error submitting review:", error);
